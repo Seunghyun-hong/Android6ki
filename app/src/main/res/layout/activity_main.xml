@@ -6,13 +6,11 @@
     android:layout_height="match_parent"
     tools:context="com.example.thunder.myapplication.MainActivity">
 
-    <TextView
+
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="75dp"
-        android:background="#e59bad"
-        android:textSize="45sp"
-        android:text="Hello World 안녕" />
-
-
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:src="@drawable/pic" />
 
 </LinearLayout>
