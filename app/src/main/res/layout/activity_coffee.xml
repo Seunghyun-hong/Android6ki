@@ -56,10 +56,11 @@
         android:textColor="#000000" />
 
     <TextView
+        android:id="@+id/prise_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="$0"
+        android:text="0원"
         android:textColor="#000000" />
 
     <Button
