@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 public class CoffeeActivity extends AppCompatActivity {
 
+    public static final int Min_Quntity = 0;
     //field 전역변수
     private TextView mQuantityTextView;// 이걸 바꿀꺼니까 다른 지역변수에들도 쓸 수 있게 밖으로 빼줌.
     private int mQuantity = 1;
@@ -45,8 +46,8 @@ public class CoffeeActivity extends AppCompatActivity {
         //근데 그지같애..ㅋㅋ
         //원장님 버전
         mQuantity--;
-        if (mQuantity < 0) {
-            mQuantity = 0;
+        if (mQuantity < Min_Quntity) {
+            mQuantity = Min_Quntity;
         }
         mQuantityTextView.setText(" " + mQuantity);
         //맥스로 해도 Math.Max 도 있데..
