@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.thunder.myapplication.CountCounterActivity">
+
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:text="Team A"
+                android:layout_marginBottom="16dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/apoint_text"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:text="0"/>
+            <Button
+                android:onClick="aPlus3ButtonClicked"
+                android:id="@+id/aplus3_button"
+                android:layout_gravity="center"
+                android:text="+3 points"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content" />
+            <Button
+                android:onClick="aPlus2ButtonClicked"
+                android:id="@+id/aplus2_button"
+                android:text="+2 points"
+                android:layout_gravity="center"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content" />
+            <Button
+                android:onClick="aPlus1ButtonClicked"
+                android:id="@+id/aplus1_button"
+                android:text="free throw"
+                android:layout_gravity="center"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_gravity=""
+            android:layout_margin="8dp"
+            android:text=" "
+            android:background="#7d000000"
+            android:layout_width="wrap_content"
+            android:layout_height="240dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:text="Team A"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/bpoint_text"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:textSize="30sp"
+                android:layout_height="wrap_content"
+                android:text="0"/>
+            <Button
+                android:onClick="bPlus3ButtonClicked"
+                android:id="@+id/bpuls3_butten"
+                android:layout_gravity="center"
+                android:text="+3 points"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content" />
+            <Button
+                android:onClick="bPlus2ButtonClicked"
+                android:id="@+id/bpuls2_butten"
+                android:text="+2 points"
+                android:layout_gravity="center"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content" />
+            <Button
+                android:onClick="bPlus1ButtonClicked"
+                android:id="@+id/bpuls1_butten"
+                android:text="free throw"
+                android:layout_gravity="center"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:onClick="resetButtonClicked"
+        android:id="@+id/reset_button"
+        android:layout_margin="16dp"
+        android:layout_gravity="center"
+        android:text="reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
