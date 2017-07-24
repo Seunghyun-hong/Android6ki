@@ -38,7 +38,8 @@
                 android:hint="비밀번호"
                 android:textSize="24dp"
                 tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="0dp" />
+                tools:layout_editor_absoluteY="0dp"
+                android:inputType="textPassword" />
 
         </LinearLayout>
 

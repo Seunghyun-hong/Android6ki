@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static final int REQUEST_CODE_LOGIN = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this,
                         AdministerActivity.class);
                 intent.putExtra("data", message);
-                startActivityForResult(intent, 100);
+                startActivityForResult(intent, REQUEST_CODE_LOGIN);
             }
         });
     }
@@ -45,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100 &&
+        if (requestCode == REQUEST_CODE_LOGIN &&
                 resultCode == RESULT_OK &&
                 data != null) {
             String message = data.getStringExtra("data");
