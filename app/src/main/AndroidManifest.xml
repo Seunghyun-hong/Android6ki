@@ -52,7 +52,22 @@
             </intent-filter>
         </activity>
         <activity android:name=".AdministerActivity" />
-        <activity android:name=".ImplicitIntentActivity"></activity>
+        <activity
+            android:name=".ImplicitIntentActivity"
+            android:label="인텐트 해보자">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MyWebBrowserActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
