@@ -19,19 +19,26 @@ public class MyWebBrowserActivity extends AppCompatActivity {
 
         mWebView = (WebView) findViewById(R.id.web_view);
         mUrlEditText = (EditText) findViewById(R.id.url_edit);
+
+        // 요거 해 줘야 된뎅
+        mWebView.setWebViewClient(new WebViewClient());
+
+        //자바 스크립트를 사용하는 페이지를 볼 수 있게
+        mWebView.getSettings().setJavaScriptEnabled(true);
+
+        // 위에 두줄은 필!수! .
+
     }
+
 
     public void showWebPage(View view) {
         String url = mUrlEditText.getText().toString();
-        if (url.contains("http://")) {
+        if (url.startsWith("http://")||url.startsWith("https://")) {
             mWebView.loadUrl(url);
         } else {
             mWebView.loadUrl("http://" + url);
         }
 
-
-        // 요거 해 줘야 된뎅
-        mWebView.setWebViewClient(new WebViewClient());
     }
 
     public void goBack(View view) {
