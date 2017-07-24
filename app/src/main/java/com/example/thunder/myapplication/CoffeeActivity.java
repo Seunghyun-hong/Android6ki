@@ -1,6 +1,7 @@
 package com.example.thunder.myapplication;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -70,19 +71,23 @@ public class CoffeeActivity extends AppCompatActivity {
     }
 
 
-    //원장님버전
+    //원장님버전 (이메일로 보내는 거고 mailto는 반드시 들어가야 하네..)
     public void orderButtonClicked(View view) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setType("text/plaint");
-        intent.putExtra(Intent.EXTRA_EMAIL, "a123@gmail.com");
+//        intent.setType("text/plaint");
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"a123@gmail.com"});
         intent.putExtra(Intent.EXTRA_TITLE, "주문이요");
         intent.putExtra(Intent.EXTRA_TEXT, mPriceTextView.getText().toString());
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
+        }
     }
+}
 
-    //내버전
+
+        //내버전
 
 //    public void sendTextMessage(String message) {
 //        Intent intent = new Intent(Intent.ACTION_SENDTO);
@@ -107,5 +112,3 @@ public class CoffeeActivity extends AppCompatActivity {
 //        sendTextMessage(message);
 //
 //    }
-
-}
