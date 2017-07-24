@@ -70,27 +70,42 @@ public class CoffeeActivity extends AppCompatActivity {
     }
 
 
-    public void sendTextMessage(String message) {
+    //원장님버전
+    public void orderButtonClicked(View view) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setType("text/plaint");
-        intent.putExtra(Intent.EXTRA_TEXT, message);
+        intent.putExtra(Intent.EXTRA_EMAIL, "a123@gmail.com");
+        intent.putExtra(Intent.EXTRA_TITLE, "주문이요");
+        intent.putExtra(Intent.EXTRA_TEXT, mPriceTextView.getText().toString());
+
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
-        }
     }
 
-    public void orderButtonClicked(View view) {
-        mQuantityTextView.setText("" + mQuantity);
+    //내버전
 
-        String message = "주문자 : " + mNameEditText.getText().toString();
-        message += "\n====================";
-        message += "\n휘핑 크림 추가 여부 : " + mWippedCreamCheckBox.isChecked();
-        message += "\n갯수 : " + mQuantity;
-        message += "\n가격 : " + mFormat.format(mQuantity * COFFEE_PRICE) + "원";
+//    public void sendTextMessage(String message) {
+//        Intent intent = new Intent(Intent.ACTION_SENDTO);
+//        intent.setType("text/plaint");
+//        intent.putExtra(Intent.EXTRA_TEXT, message);
+//        if (intent.resolveActivity(getPackageManager()) != null) {
+//            startActivity(intent);
+//        }
+//    }
+//
+//    public void orderButtonClicked(View view) {
+//        mQuantityTextView.setText("" + mQuantity);
+//
+//        String message = "주문자 : " + mNameEditText.getText().toString();
+//        message += "\n====================";
+//        message += "\n휘핑 크림 추가 여부 : " + mWippedCreamCheckBox.isChecked();
+//        message += "\n갯수 : " + mQuantity;
+//        message += "\n가격 : " + mFormat.format(mQuantity * COFFEE_PRICE) + "원";
+//
+//        mPriceTextView.setText(message);
+//
+//        sendTextMessage(message);
+//
+//    }
 
-        mPriceTextView.setText(message);
-
-        sendTextMessage(message);
-
-    }
 }
