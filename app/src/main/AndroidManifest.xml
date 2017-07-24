@@ -42,7 +42,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".TargetActivity" />
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
             android:label="화면 전환">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,7 +51,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdministerActivity"></activity>
+        <activity android:name=".AdministerActivity" />
+        <activity android:name=".ImplicitIntentActivity"></activity>
     </application>
 
 </manifest>
