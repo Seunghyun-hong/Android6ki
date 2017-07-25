@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.thunder.myapplication">
 
-    <!--권한 부여-->
+    <!-- 권한 부여 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -71,6 +71,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SignUpExamActivity"
+            android:label="SignUpExam">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SignUpExam2Activity"></activity>
     </application>
 
 </manifest>
