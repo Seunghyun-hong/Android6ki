@@ -71,7 +71,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpExamActivity"
+        <activity
+            android:name=".SignUpExamActivity"
             android:label="SignUpExam">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -79,7 +80,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpExam2Activity"></activity>
+        <activity
+            android:name=".SignUpMessageActivity"
+            android:label="가입정보확인" />
+        <activity android:name=".adapterView.AdapterViewExamActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
