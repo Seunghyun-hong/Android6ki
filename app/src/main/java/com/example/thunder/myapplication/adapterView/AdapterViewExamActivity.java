@@ -32,10 +32,15 @@ public class AdapterViewExamActivity extends AppCompatActivity {
         }
 
         //Adapter
+        PeopleAdapter adapter = new PeopleAdapter(AdapterViewExamActivity.this,data);
+        /**
+         * 우리가 아까 피플어댑터를 만들때 베이스어탭터를 상속받았는데
+         * 피플어댑터 가보니까 ListAdapter 구현하고 있었음.
+         * 그래서 그냥 아까 쓰던대로
+         * listview.setAdapter 해도 잘 작동이 됨!
+         */
 
-
-
-//        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
     }
 }
