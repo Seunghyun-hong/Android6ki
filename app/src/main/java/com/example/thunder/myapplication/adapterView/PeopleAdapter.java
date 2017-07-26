@@ -55,6 +55,7 @@ public class PeopleAdapter extends BaseAdapter {
     // 화면에 레이아웃이 6개가 보인다 하면 우리가 만든 getview 가 6번 일한거~
     // 지워지는거=새로생기는거 레퍼런스(주소)를 교환하면서?! 난지워진다~ 넌 새로 적어~ 이렇게 해줄 수 있게 하는게
     //convertview 이거래!!!
+    //(내가 이해 한게 맞네... 책 1011 페이지에 그림 있음)
     // 원장님은
     // convertView - position번째의 레이아웃의 레퍼런스
     // 이렇게 설명 붙이심..
@@ -109,7 +110,7 @@ public class PeopleAdapter extends BaseAdapter {
         if (convertView == null) {
             // 최초
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_exam, parent, false);
-            holder = new ViewHolder();
+            holder = new ViewHolder();  // 홀더는 이미지 이름 폰넘버를 가지고 있는 에
             // 레이아웃 가지고 오기
             ImageView imageView = (ImageView) convertView.findViewById(R.id.image_view);
             TextView nameTextView = (TextView) convertView.findViewById(R.id.name_text);
@@ -120,6 +121,7 @@ public class PeopleAdapter extends BaseAdapter {
 
             convertView.setTag(holder); //이 태그는 별다른 기능없이 약간에 꼬리표 붙여주는 개념? 저장개념이라고 생각하면 되려나?
             // 그래서 이걸 써줌으로써 태그 들렁오니까 재활용 할때도 이용할 수 있지.
+            // 레퍼런스를 들고 있는거래....
         } else {
             //재사용
             holder = (ViewHolder) convertView.getTag();
@@ -134,17 +136,10 @@ public class PeopleAdapter extends BaseAdapter {
         holder.name.setText(people.getName());
         holder.phone.setText(people.getPhone());
 
-
-
-
-
-
-
-
         return convertView;
     }
 
-     private static class ViewHolder {
+     private static class ViewHolder {  //레퍼런스를 물고 있을려고 만든거래
          ImageView image;
          TextView name;
          TextView phone;
