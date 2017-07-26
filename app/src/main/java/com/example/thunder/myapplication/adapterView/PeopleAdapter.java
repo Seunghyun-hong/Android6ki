@@ -70,41 +70,84 @@ public class PeopleAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //여기서부터는 기계적으로 외워서 치면 된데...ㅎㅎ
-        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_exam, parent, false);
-        //layoutinflater 는 리소스를 가지고 올때 인플리터를 통해 가지고 올 수 있는데
-        // 레이아웃을 가지고 오게 해주는 객체에요.
-        // 그러고 .from 해서 컨텍스트를 가지고 오게 하면
-        // 알아서 가지고 올끄에요
-        // 임플레이터가 붙일끄에요.
-        // 아까 내가 만든 레이아웃을 말이죠!(item_exam)
-        // parent 부모에게 말이죠!!
-        // 이 View convertView 가 루트에 붙냐?(attachToRoot)[루트는 최상위 레이아웃이냐 아니냐 라는 뜻이래]
-        // 그런데 이 어탭트 안에서는 다 차일드야. position을 가지고 있는 차일드!!
-        // 그래서 최상위가 아니니까! 항상 false 인거지!!
+//        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_exam, parent, false);
+//        //layoutinflater 는 리소스를 가지고 올때 인플리터를 통해 가지고 올 수 있는데
+//        // 레이아웃을 가지고 오게 해주는 객체에요.
+//        // 그러고 .from 해서 컨텍스트를 가지고 오게 하면
+//        // 알아서 가지고 올끄에요
+//        // 임플레이터가 붙일끄에요.
+//        // 아까 내가 만든 레이아웃을 말이죠!(item_exam)
+//        // parent 부모에게 말이죠!!
+//        // 이 View convertView 가 루트에 붙냐?(attachToRoot)[루트는 최상위 레이아웃이냐 아니냐 라는 뜻이래]
+//        // 그런데 이 어탭트 안에서는 다 차일드야. position을 가지고 있는 차일드!!
+//        // 그래서 최상위가 아니니까! 항상 false 인거지!!
+//
+//        // 이렇게 가지고 왔으니.. 그럼 이미지랑 텍뷰랑 다 가져와야 겠지 파인트뷰아이디 해서...
+//        // 그러면 아이템이그잼에 가서 모두에게 아이디를 주고
+//        // 나는 가지고 온다.
+////        ImageView imageView = fin
+//                // 그런데 파인드 뷰아이디가 안나옴.. 뭐징?
+//        // 레이아웃 가지고 오기
+//        ImageView imageView = (ImageView) convertView.findViewById(R.id.image_view);
+//        TextView nameTextView = (TextView) convertView.findViewById(R.id.name_text);
+//        TextView phoneTextView = (TextView) convertView.findViewById(R.id.phone_text);
+//
+//        // 이젠 불러왔으니까 위에 있는 애들한데 데이터를 넣어주면 됨..(mData 에 있다!데이터는 메소드 getItem에도 있공)
+//        // data
+//        People people = mData.get(position); // 난 이렇게 해야지 원장님은
+////        People people = (People) getItem(position); 이렇게 쓰는걸 선호한데.
+//        // 이미지 텍뷰 다 넣어주자!
+//        // 이미지 src 대시 셋이미지리소스로 해준다.
+//        // 뿌리기
+//        imageView.setImageResource(people.getPicture());
+//        nameTextView.setText(people.getName());
+//        phoneTextView.setText(people.getPhone());
 
-        // 이렇게 가지고 왔으니.. 그럼 이미지랑 텍뷰랑 다 가져와야 겠지 파인트뷰아이디 해서...
-        // 그러면 아이템이그잼에 가서 모두에게 아이디를 주고
-        // 나는 가지고 온다.
-//        ImageView imageView = fin
-                // 그런데 파인드 뷰아이디가 안나옴.. 뭐징?
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.image_view);
-        TextView nameTextView = (TextView) convertView.findViewById(R.id.name_text);
-        TextView phoneTextView = (TextView) convertView.findViewById(R.id.phone_text);
+        // 이제 분기 타서 나눠주자!! (내폰이 죽어버림...왜 그런지 모르클..ㅠㅠㅠ 리턴이 null 이라 죽음..ㅋㅋㅋㅋ covertView로 바꿔줌)
 
-        // 이젠 불러왔으니까 위에 있는 애들한데 데이터를 넣어주면 됨..(mData 에 있다!데이터는 메소드 getItem에도 있공)
-        // data
+        ViewHolder holder = null;
+        if (convertView == null) {
+            // 최초
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_exam, parent, false);
+            holder = new ViewHolder();
+            // 레이아웃 가지고 오기
+            ImageView imageView = (ImageView) convertView.findViewById(R.id.image_view);
+            TextView nameTextView = (TextView) convertView.findViewById(R.id.name_text);
+            TextView phoneTextView = (TextView) convertView.findViewById(R.id.phone_text);
+            holder.image = imageView;
+            holder.name = nameTextView;
+            holder.phone = phoneTextView;
+
+            convertView.setTag(holder); //이 태그는 별다른 기능없이 약간에 꼬리표 붙여주는 개념? 저장개념이라고 생각하면 되려나?
+            // 그래서 이걸 써줌으로써 태그 들렁오니까 재활용 할때도 이용할 수 있지.
+        } else {
+            //재사용
+            holder = (ViewHolder) convertView.getTag();
+        }
+
+        // data  (데이터는 뭐 건들지 않았음.)
         People people = mData.get(position); // 난 이렇게 해야지 원장님은
 //        People people = (People) getItem(position); 이렇게 쓰는걸 선호한데.
-        // 이미지 텍뷰 다 넣어주자!
-        // 이미지 src 대시 셋이미지리소스로 해준다.
-        // 뿌리기
-        imageView.setImageResource(people.getPicture());
-        nameTextView.setText(people.getName());
-        phoneTextView.setText(people.getPhone());
+
+        // 뿌리기  (뿌릴땐 holder가 들고 있으니까 홀더로 바꿔주면 됨.
+        holder.image.setImageResource(people.getPicture());
+        holder.name.setText(people.getName());
+        holder.phone.setText(people.getPhone());
 
 
 
 
-        return null;
+
+
+
+
+        return convertView;
     }
+
+     private static class ViewHolder {
+         ImageView image;
+         TextView name;
+         TextView phone;
+     }
+
 }

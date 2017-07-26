@@ -83,7 +83,8 @@
         <activity
             android:name=".SignUpMessageActivity"
             android:label="가입정보확인" />
-        <activity android:name=".adapterView.AdapterViewExamActivity">
+        <activity android:name=".adapterView.AdapterViewExamActivity"
+            android:label="Adapter">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
