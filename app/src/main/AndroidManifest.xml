@@ -83,8 +83,17 @@
         <activity
             android:name=".SignUpMessageActivity"
             android:label="가입정보확인" />
-        <activity android:name=".adapterView.AdapterViewExamActivity"
+        <activity
+            android:name=".adapterView.AdapterViewExamActivity"
             android:label="Adapter">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".adapterviewexam.ColorfulAdapterActivity"
+            android:label="알록달록 리스트뷰">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
