@@ -4,14 +4,14 @@
 
     <item
         android:id="@+id/action_item1"
-        android:icon="?android:attr/actionModeShareDrawable"
+        android:icon="@color/colorAccent"
         android:title="Item1"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_item2"
-        android:icon="?android:attr/actionModeWebSearchDrawable"
+        android:icon="@drawable/ic_filter_vintage_black_24dp"
         android:title="Item2"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_item3"
         android:icon="@drawable/ic_android_black_24dp"
