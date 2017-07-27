@@ -49,7 +49,7 @@ public class PositionAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ViewHolder holder = null;
+        ViewHolder holder = null; //
         if (convertView == null) {
             // 최초
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_colorful_exam, parent, false);
@@ -60,6 +60,7 @@ public class PositionAdapter extends BaseAdapter {
 
             convertView.setTag(holder); //이 태그는 별다른 기능없이 약간에 꼬리표 붙여주는 개념? 저장개념이라고 생각하면 되려나?
             // 그래서 이걸 써줌으로써 태그 들렁오니까 재활용 할때도 이용할 수 있지.
+            // 아무 오브젝트나 엮을 수 있데... 만약 뷰가 6개가 보인다면 홀더도 6개!
         } else {
             //재사용
             holder = (ViewHolder) convertView.getTag();
