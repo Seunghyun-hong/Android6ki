@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +21,9 @@ public class AdapterViewExamActivity extends AppCompatActivity {
 
     private static final String TAG = AdapterViewExamActivity.class.getSimpleName();
     private ArrayList<People> data;
+    private ArrayList<People> mPeopleData;
+    private PeopleAdapter mAdapter;
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +31,10 @@ public class AdapterViewExamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adapter_view);
 
         //View
-        ListView listView = (ListView) findViewById(R.id.list_view);
+        mListView = (ListView) findViewById(R.id.list_view);
 
         //Data
-        data = new ArrayList<>();  //원래 다 필드로 빼줘야 한다...
+        mPeopleData = new ArrayList<>();  //원래 다 필드로 빼줘야 한다...
         for (int i = 0; i < 100; i++) {
             int picture;
             if (i % 2 == 0) {
@@ -38,11 +43,12 @@ public class AdapterViewExamActivity extends AppCompatActivity {
                 picture = R.drawable.beach2;
             }
             People people = new People("아무개 " + i, "전화번호 " + i, picture);
-            data.add(people);
+            mPeopleData.add(people);
         }
 
         //Adapter
-        PeopleAdapter adapter = new PeopleAdapter(AdapterViewExamActivity.this, data);
+        mAdapter = new PeopleAdapter(AdapterViewExamActivity.this, mPeopleData);
+
         /**
          * 우리가 아까 피플어댑터를 만들때 베이스어탭터를 상속받았는데
          * 피플어댑터 가보니까 ListAdapter 구현하고 있었음.
@@ -50,13 +56,13 @@ public class AdapterViewExamActivity extends AppCompatActivity {
          * listview.setAdapter 해도 잘 작동이 됨!
          */
 
-        listView.setAdapter(adapter);
+        mListView.setAdapter(mAdapter);;
 
         // OnItemClickListener // 터치가 되면 각각 움직이는 걸 만들고 싶어
 
 //        listView.setOnClickListener(); // 그런데 이걸로 하면 각각 먹는게 아니라 그냥 한번에 먹어버리기때문에 안쓸꺼임
         // 그래서 아이템!별로 클릭리스터를 만들어줄끄야.
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //parent는 listView 에 대한 레퍼런스  // view 는 내가 눌른 레이아웃(뷰)의 레퍼런스 // position 내가 눌른 위치 /==/ id 는 우리가 걍 포지션으로 정함
@@ -98,23 +104,28 @@ public class AdapterViewExamActivity extends AppCompatActivity {
 
 
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(AdapterViewExamActivity.this, "롱 클릭", Toast.LENGTH_SHORT).show();
-                return false;
-                // 리턴 값이 나오는데 트루하면 롱클릭을 했을때 롱클릭이라고 잘 나옴.
-                // 그런데 사람이 롱클릭을 하고 싶지 않을때 그럴 수 도 있잖여~
-                // 롱클릭이 되었다고 알려주긴 하지만 시스템에는 롱클릭이 안되었어요 라고 전달하는게 폴스!
-                // 폴스로 하고 롱클릭 하면 롱클릭도 출력되고 그냥클릭도 출력됨.
-                // 그러니까 시스템은 롱클릭이 되지 않았다고 생각을 해서 "그냥클릭"이 된걸로 인식을 한다.
-                /// 이런걸 :이벤트 소비제어: 라고 한다
-                // 그래서 트루로 하면 이벤트를 소비하겠다 더이상 이벤트가 흘러가지 않는다~
-                // 아주 중요한 거니까 기억해둬.
-            }
-        });
-    }
+//        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(AdapterViewExamActivity.this, "롱 클릭", Toast.LENGTH_SHORT).show();
+//                return false;
+//                // 리턴 값이 나오는데 트루하면 롱클릭을 했을때 롱클릭이라고 잘 나옴.
+//                // 그런데 사람이 롱클릭을 하고 싶지 않을때 그럴 수 도 있잖여~
+//                // 롱클릭이 되었다고 알려주긴 하지만 시스템에는 롱클릭이 안되었어요 라고 전달하는게 폴스!
+//                // 폴스로 하고 롱클릭 하면 롱클릭도 출력되고 그냥클릭도 출력됨.
+//                // 그러니까 시스템은 롱클릭이 되지 않았다고 생각을 해서 "그냥클릭"이 된걸로 인식을 한다.
+//                /// 이런걸 :이벤트 소비제어: 라고 한다
+//                // 그래서 트루로 하면 이벤트를 소비하겠다 더이상 이벤트가 흘러가지 않는다~
+//                // 아주 중요한 거니까 기억해둬.
+//            }
+//        });
 
+
+        // Context 메뉴 연결
+        registerForContextMenu(mListView);
+        //롱클릭 활성화되면 이게 먹질 않으니까 롱클릭 메뉴는 잠시 꺼두자.
+    }
+////////////////////////////////////////////
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -144,4 +155,45 @@ public class AdapterViewExamActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+///////////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_coffee, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        //info 는 눌린애의 정보를 가지고 있데
+        // 포지션하고 타겟뷰 정도 정보를 얻을 수있음
+        switch (item.getItemId()) {
+            case R.id.action_item1:
+                Toast.makeText(this, "action 1", Toast.LENGTH_SHORT).show();
+                // 삭제
+                mPeopleData.remove(info.position);
+                // 업데이트
+                // 어뎁터에게 알려준다 야! 데이터 바뀌었어!!!
+                mAdapter.notifyDataSetChanged();
+/////////////////////이게 최선의 방법 ///////////////////////
+                // 안좋은 방법은
+                mListView.setAdapter(new PeopleAdapter(this, mPeopleData));
+                //또는
+                mListView.setAdapter(mAdapter);
+                // 그런데 새로 만드는 거라서 중간에서 삭제 하면 위로 올라가버리고(새로만드니까)
+                //좋지 않다.
+
+                return true;
+            case R.id.action_item2:
+                Toast.makeText(this, "action 2", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+
 }
