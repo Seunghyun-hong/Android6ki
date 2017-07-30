@@ -2,10 +2,10 @@ package com.example.thunder.myapplication.adapterView;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.thunder.myapplication.R;
 
@@ -49,6 +49,7 @@ public class AdapterViewExamActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         // OnItemClickListener // 터치가 되면 각각 움직이는 걸 만들고 싶어
+
 //        listView.setOnClickListener(); // 그런데 이걸로 하면 각각 먹는게 아니라 그냥 한번에 먹어버리기때문에 안쓸꺼임
         // 그래서 아이템!별로 클릭리스터를 만들어줄끄야.
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -73,7 +74,14 @@ public class AdapterViewExamActivity extends AppCompatActivity {
                 // 아무거나 하나 쓰면 된데.
                 // 그리고 data를 전역변수로 해버리면 파이널 안 붙이고도 사용할 수 있데.
                 // 원래 위에 있는것들 다 전역으로 빼야 하는데 지금 실습하는거라 딱히 안해둔거임..
-                Toast.makeText(AdapterViewExamActivity.this, people.toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AdapterViewExamActivity.this, people.toString(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onItemClick: " + people.toString());    // debug 의 약자
+                //개발중일때만 보이는 로그 // 누군가가 어플을 다운받고 여기서 실행한다고 해도 로그는 뜨지 않음!
+                Log.e(TAG, "onItemClick: 에러 ");    // error
+                // 제품이 나가도 이건 보이는거.
+                Log.i(TAG, "onItemClick: 정보");    // information
+                // 일반적으로 보이는 정보들...
+                Log.w(TAG, "onItemClick: 경고");  // warning
             }
         });
     }

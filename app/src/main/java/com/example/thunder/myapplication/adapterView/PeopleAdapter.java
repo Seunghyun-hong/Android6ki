@@ -1,6 +1,7 @@
 package com.example.thunder.myapplication.adapterView;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import java.util.List;
  */
 
 public class PeopleAdapter extends BaseAdapter {
+
+    private final String TAG = PeopleAdapter.class.getSimpleName();
 
     private final List<People> mData;  //실제 데이터를 받아온다
     private final Context mContext;
@@ -108,6 +111,7 @@ public class PeopleAdapter extends BaseAdapter {
 
         ViewHolder holder = null;
         if (convertView == null) {
+            Log.d(TAG, "getView 최초 : " + position);
             // 최초
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_exam, parent, false);
             holder = new ViewHolder();  // 홀더는 이미지 이름 폰넘버를 가지고 있는 에
@@ -123,6 +127,7 @@ public class PeopleAdapter extends BaseAdapter {
             // 그래서 이걸 써줌으로써 태그 들렁오니까 재활용 할때도 이용할 수 있지.
             // 레퍼런스를 들고 있는거래....
         } else {
+            Log.d(TAG, "getView 재사용 : " + position);
             //재사용
             holder = (ViewHolder) convertView.getTag();
         }
