@@ -92,7 +92,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".adapterviewexam.ColorfulAdapterActivity"
+        <activity
+            android:name=".adapterviewexam.ColorfulAdapterActivity"
             android:label="알록달록 리스트뷰">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -100,6 +101,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".adapterView.DetailAddressActivity"></activity>
     </application>
 
 </manifest>

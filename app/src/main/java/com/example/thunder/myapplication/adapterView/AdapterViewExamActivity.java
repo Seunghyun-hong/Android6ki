@@ -1,5 +1,6 @@
 package com.example.thunder.myapplication.adapterView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -82,6 +83,13 @@ public class AdapterViewExamActivity extends AppCompatActivity {
 //                Log.i(TAG, "onItemClick: 정보");    // information
 //                // 일반적으로 보이는 정보들...
 //                Log.w(TAG, "onItemClick: 경고");  // warning
+
+                Intent intent = new Intent(AdapterViewExamActivity.this,
+                        DetailAddressActivity.class);
+                intent.putExtra("name", people.getName());
+                intent.putExtra("phone", people.getPhone());
+                intent.putExtra("picture", people.getPicture());
+                startActivity(intent);
             }
         });
 
