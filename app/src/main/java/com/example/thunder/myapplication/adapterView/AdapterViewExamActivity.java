@@ -2,10 +2,10 @@ package com.example.thunder.myapplication.adapterView;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.thunder.myapplication.R;
 
@@ -74,14 +74,32 @@ public class AdapterViewExamActivity extends AppCompatActivity {
                 // 아무거나 하나 쓰면 된데.
                 // 그리고 data를 전역변수로 해버리면 파이널 안 붙이고도 사용할 수 있데.
                 // 원래 위에 있는것들 다 전역으로 빼야 하는데 지금 실습하는거라 딱히 안해둔거임..
-//                Toast.makeText(AdapterViewExamActivity.this, people.toString(), Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "onItemClick: " + people.toString());    // debug 의 약자
-                //개발중일때만 보이는 로그 // 누군가가 어플을 다운받고 여기서 실행한다고 해도 로그는 뜨지 않음!
-                Log.e(TAG, "onItemClick: 에러 ");    // error
-                // 제품이 나가도 이건 보이는거.
-                Log.i(TAG, "onItemClick: 정보");    // information
-                // 일반적으로 보이는 정보들...
-                Log.w(TAG, "onItemClick: 경고");  // warning
+                Toast.makeText(AdapterViewExamActivity.this, "그냥 클릭", Toast.LENGTH_SHORT).show();
+//                Log.d(TAG, "onItemClick: " + people.toString());    // debug 의 약자
+//                //개발중일때만 보이는 로그 // 누군가가 어플을 다운받고 여기서 실행한다고 해도 로그는 뜨지 않음!
+//                Log.e(TAG, "onItemClick: 에러 ");    // error
+//                // 제품이 나가도 이건 보이는거.
+//                Log.i(TAG, "onItemClick: 정보");    // information
+//                // 일반적으로 보이는 정보들...
+//                Log.w(TAG, "onItemClick: 경고");  // warning
+            }
+        });
+
+
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(AdapterViewExamActivity.this, "롱 클릭", Toast.LENGTH_SHORT).show();
+                return false;
+                // 리턴 값이 나오는데 트루하면 롱클릭을 했을때 롱클릭이라고 잘 나옴.
+                // 그런데 사람이 롱클릭을 하고 싶지 않을때 그럴 수 도 있잖여~
+                // 롱클릭이 되었다고 알려주긴 하지만 시스템에는 롱클릭이 안되었어요 라고 전달하는게 폴스!
+                // 폴스로 하고 롱클릭 하면 롱클릭도 출력되고 그냥클릭도 출력됨.
+                // 그러니까 시스템은 롱클릭이 되지 않았다고 생각을 해서 "그냥클릭"이 된걸로 인식을 한다.
+                /// 이런걸 :이벤트 소비제어: 라고 한다
+                // 그래서 트루로 하면 이벤트를 소비하겠다 더이상 이벤트가 흘러가지 않는다~
+                // 아주 중요한 거니까 기억해둬.
             }
         });
     }
