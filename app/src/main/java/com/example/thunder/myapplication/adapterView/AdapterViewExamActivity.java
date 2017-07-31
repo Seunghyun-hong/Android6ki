@@ -1,7 +1,9 @@
 package com.example.thunder.myapplication.adapterView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -10,7 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.thunder.myapplication.R;
@@ -24,6 +29,7 @@ public class AdapterViewExamActivity extends AppCompatActivity {
     private ArrayList<People> mPeopleData;
     private PeopleAdapter mAdapter;
     private ListView mListView;
+    private EditText mWeatherEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,8 @@ public class AdapterViewExamActivity extends AppCompatActivity {
 
         //View
         mListView = (ListView) findViewById(R.id.list_view);
+        GridView gridView = (GridView) findViewById(R.id.grid_view);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
         //Data
         mPeopleData = new ArrayList<>();  //원래 다 필드로 빼줘야 한다...
@@ -56,7 +64,10 @@ public class AdapterViewExamActivity extends AppCompatActivity {
          * listview.setAdapter 해도 잘 작동이 됨!
          */
 
-        mListView.setAdapter(mAdapter);;
+        mListView.setAdapter(mAdapter);
+
+        gridView.setAdapter(mAdapter);
+        spinner.setAdapter(mAdapter);
 
         // OnItemClickListener // 터치가 되면 각각 움직이는 걸 만들고 싶어
 
@@ -103,7 +114,6 @@ public class AdapterViewExamActivity extends AppCompatActivity {
         });
 
 
-
 //        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 //            @Override
 //            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -124,8 +134,23 @@ public class AdapterViewExamActivity extends AppCompatActivity {
         // Context 메뉴 연결
         registerForContextMenu(mListView);
         //롱클릭 활성화되면 이게 먹질 않으니까 롱클릭 메뉴는 잠시 꺼두자.
+
+
+        // SharedPreference 데이터 복원
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(AdapterViewExamActivity.this);
+        //원래 여기엔 아무것도 존재하지 않는데... 그래서 디폴드 값을 초기값을 줘서 만들어주는거래.
+        String weather = settings.getString("weather", "맑음"); //디폴드 값은 암케나~
+
+        mWeatherEditText = (EditText) findViewById(R.id.weather_eidt);
+        mWeatherEditText.setText(weather); // 셋텍스트에 워더를 넣어주면 디폴트 값으로 맑음이 들어가겠지.
+
+        //그럼 이제 뭘 할때 저 위에 날씨가 저장이 되는지 설정을 해볼까??
+        // 뒤로가기 키를 눌렀을때 저장되게 하자!!!
+
+
     }
-////////////////////////////////////////////
+
+    ////////////////////////////////////////////
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -195,5 +220,24 @@ public class AdapterViewExamActivity extends AppCompatActivity {
         }
     }
 
+    /////////뒤로 가기 키로 저장을 해보자///////////////
 
+
+    @Override
+    public void onBackPressed() {
+        // 뒤로 가기전에 저장!
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("weather", mWeatherEditText.getText().toString());
+
+        // Commit the edits!  반영할때
+        editor.apply();
+        //커밋은 어플라이생기기 전에 쓰던거..
+        // 커밋은 동기고 (싱크를 맞추면서 간다)-ex) 복사좀 해줘~ 복사할때까지 가만히...
+        // 어플라이는 비동기 -복사해줭~ 하면서 나는 다른것도 하는...그런거.
+        // 나중에 뒷부분 가서 자세히 다룬데
+
+        // 뒤로 가기
+        super.onBackPressed();
+    }
 }
