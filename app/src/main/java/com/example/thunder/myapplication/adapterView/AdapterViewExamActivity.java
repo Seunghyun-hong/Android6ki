@@ -1,9 +1,11 @@
 package com.example.thunder.myapplication.adapterView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -22,7 +24,7 @@ import com.example.thunder.myapplication.R;
 
 import java.util.ArrayList;
 
-public class AdapterViewExamActivity extends AppCompatActivity {
+public class AdapterViewExamActivity extends AppCompatActivity implements DialogInterface.OnClickListener{
 
     private static final String TAG = AdapterViewExamActivity.class.getSimpleName();
     private ArrayList<People> data;
@@ -147,7 +149,6 @@ public class AdapterViewExamActivity extends AppCompatActivity {
         //그럼 이제 뭘 할때 저 위에 날씨가 저장이 되는지 설정을 해볼까??
         // 뒤로가기 키를 눌렀을때 저장되게 하자!!!
 
-
     }
 
     ////////////////////////////////////////////
@@ -192,24 +193,72 @@ public class AdapterViewExamActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         //info 는 눌린애의 정보를 가지고 있데
         // 포지션하고 타겟뷰 정도 정보를 얻을 수있음
         switch (item.getItemId()) {
             case R.id.action_item1:
                 Toast.makeText(this, "action 1", Toast.LENGTH_SHORT).show();
-                // 삭제
-                mPeopleData.remove(info.position);
-                // 업데이트
-                // 어뎁터에게 알려준다 야! 데이터 바뀌었어!!!
-                mAdapter.notifyDataSetChanged();
+
+                // 물어보자 AlertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(AdapterViewExamActivity.this);
+                builder.setTitle("삭제");
+                builder.setMessage("정말로 삭제하시겠습니까?");
+//                builder.setAdapter(); 셋어뎁터가 된다는 것은 리스트뷰를 사용할 수 있다는 거겠지?
+                // 바깥 부분 클릭 했을 때 닫기
+                builder.setCancelable(false); //해버리면 밖에 클릭해도 대화상자 사라지지 않음!
+                builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d(TAG, "onClick: " + which); // 위치가 뭔 역할이지?  모르겠으면 찍어보자!!
+                        // which는 다이얼로그 인터페이스에 정의가 되어있어.
+                        // 그래서 이 상수를 이용해서 뭔가를 할 수 있겠지..
+                        // 위에 클래스에 DialogInterface.OnClickListener 인플리먼트 하고 알트엔터하면
+                        // public void onClick(DialogInterface dialog, int which)  이거 만들어서
+                        // 여기서 스위치 문으로 돌릴 수 도 있지..
+                        // 맨밑에 해본거 있음. 참고 해봐..
+
+                        // 삭제
+                        mPeopleData.remove(info.position);
+                        // 업데이트
+                        // 어뎁터에게 알려준다 야! 데이터 바뀌었어!!!
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+
+//                builder.setNegativeButton("아니오", null);
+//                Log.d(TAG, "onContextItemSelected: " + new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Log.d(TAG, "onClick: " + which);
+//                    }
+//                });
+
+                builder.setNegativeButton("아니오",this);
+
+//                AlertDialog dialog = builder.create();
+//                dialog.show(); // 하면 화면에 보인다.
+                //\\\\\\\\\\\\\\\\\\\\\\\\\\\\==>
+                builder.setIcon(R.drawable.beach2); // 화면에 이렇게 하면 아이콘사이즈로 들어감!
+                //그런데 아니오 예 방향을 바꾸고 싶어.. 이건 버전마다 위치가 다른거거든.. 그래서 바꿀려고 하면
+                //머리 아픈뎅.. 그럼 분기를 타서 몇버전에선 위치 바꿔주고 어떤버전에서 그냥 하는 걸 만들어줘야해,
+                //그건 이런 상황이 나오면 어떻게 하는지 알려드릴게요~
+
+                builder.create().show();
+
+//                // 위에 경고창만들었으니까 위로 보내자! 밑에 삭제 및 업데이트를...
+//                // 삭제
+//                mPeopleData.remove(info.position);
+//                // 업데이트
+//                // 어뎁터에게 알려준다 야! 데이터 바뀌었어!!!
+//                mAdapter.notifyDataSetChanged();
 /////////////////////이게 최선의 방법 ///////////////////////
-                // 안좋은 방법은
-                mListView.setAdapter(new PeopleAdapter(this, mPeopleData));
-                //또는
-                mListView.setAdapter(mAdapter);
-                // 그런데 새로 만드는 거라서 중간에서 삭제 하면 위로 올라가버리고(새로만드니까)
-                //좋지 않다.
+//                // 안좋은 방법은
+//                mListView.setAdapter(new PeopleAdapter(this, mPeopleData));
+//                //또는
+//                mListView.setAdapter(mAdapter);
+//                // 그런데 새로 만드는 거라서 중간에서 삭제 하면 위로 올라가버리고(새로만드니까)
+//                //좋지 않다.
 
                 return true;
             case R.id.action_item2:
@@ -239,5 +288,16 @@ public class AdapterViewExamActivity extends AppCompatActivity {
 
         // 뒤로 가기
         super.onBackPressed();
+    }
+
+
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        switch (which) {
+            case DialogInterface.BUTTON_POSITIVE:
+                break;
+            case  DialogInterface.BUTTON_NEGATIVE:
+        }
     }
 }

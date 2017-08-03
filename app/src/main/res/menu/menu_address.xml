@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_add"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_plus"
         android:title="새 연락처"
         app:showAsAction="always" />
 </menu>
