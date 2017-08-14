@@ -1,20 +1,28 @@
 package com.example.thunder.myapplication;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 public class LifeCycleActivity extends AppCompatActivity {
 
     private static final String TAG = LifeCycleActivity.class.getSimpleName();
+
+    private int mNum = 0;
+    private Button mButton;
 
     // 액티비티가 실행 될 때
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_life_cycle);
+
+        mButton = (Button) findViewById(R.id.number_button);
 
         // 초기화
         Log.d(TAG, "onCreate: ");
@@ -30,7 +38,14 @@ public class LifeCycleActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+///////////////////////////////////////
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        mNum = settings.getInt("number", 0);
 
+        mButton.setText("" + mNum);
+
+        Log.d(TAG, "onResume: 복원");
+//////////////////////////////////////////////
         Log.d(TAG, "onResume: ");
     }
 
@@ -39,7 +54,16 @@ public class LifeCycleActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+///////////////////////////////////
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("number", mNum);
 
+        // Commit the edits!    비동기
+        editor.apply();
+
+        Log.d(TAG, "onPause: 저장");
+///////////////////////////////////////////////
         Log.d(TAG, "onPause: ");
     }
 
@@ -64,5 +88,10 @@ public class LifeCycleActivity extends AppCompatActivity {
         builder.setTitle("test");
         builder.setMessage("test");
         builder.show();
+    }
+
+    public void increment(View view) {
+        mNum++;
+        ((Button) view).setText(""+ mNum);
     }
 }
