@@ -24,7 +24,7 @@ import com.example.thunder.myapplication.R;
 
 import java.util.ArrayList;
 
-public class AdapterViewExamActivity extends AppCompatActivity implements DialogInterface.OnClickListener{
+public class AdapterViewExamActivity extends AppCompatActivity implements DialogInterface.OnClickListener {
 
     private static final String TAG = AdapterViewExamActivity.class.getSimpleName();
     private ArrayList<People> data;
@@ -199,52 +199,7 @@ public class AdapterViewExamActivity extends AppCompatActivity implements Dialog
         switch (item.getItemId()) {
             case R.id.action_item1:
                 Toast.makeText(this, "action 1", Toast.LENGTH_SHORT).show();
-
-                // 물어보자 AlertDialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(AdapterViewExamActivity.this);
-                builder.setTitle("삭제");
-                builder.setMessage("정말로 삭제하시겠습니까?");
-//                builder.setAdapter(); 셋어뎁터가 된다는 것은 리스트뷰를 사용할 수 있다는 거겠지?
-                // 바깥 부분 클릭 했을 때 닫기
-                builder.setCancelable(false); //해버리면 밖에 클릭해도 대화상자 사라지지 않음!
-                builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d(TAG, "onClick: " + which); // 위치가 뭔 역할이지?  모르겠으면 찍어보자!!
-                        // which는 다이얼로그 인터페이스에 정의가 되어있어.
-                        // 그래서 이 상수를 이용해서 뭔가를 할 수 있겠지..
-                        // 위에 클래스에 DialogInterface.OnClickListener 인플리먼트 하고 알트엔터하면
-                        // public void onClick(DialogInterface dialog, int which)  이거 만들어서
-                        // 여기서 스위치 문으로 돌릴 수 도 있지..
-                        // 맨밑에 해본거 있음. 참고 해봐..
-
-                        // 삭제
-                        mPeopleData.remove(info.position);
-                        // 업데이트
-                        // 어뎁터에게 알려준다 야! 데이터 바뀌었어!!!
-                        mAdapter.notifyDataSetChanged();
-                    }
-                });
-
-//                builder.setNegativeButton("아니오", null);
-//                Log.d(TAG, "onContextItemSelected: " + new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Log.d(TAG, "onClick: " + which);
-//                    }
-//                });
-
-                builder.setNegativeButton("아니오",this);
-
-//                AlertDialog dialog = builder.create();
-//                dialog.show(); // 하면 화면에 보인다.
-                //\\\\\\\\\\\\\\\\\\\\\\\\\\\\==>
-                builder.setIcon(R.drawable.beach2); // 화면에 이렇게 하면 아이콘사이즈로 들어감!
-                //그런데 아니오 예 방향을 바꾸고 싶어.. 이건 버전마다 위치가 다른거거든.. 그래서 바꿀려고 하면
-                //머리 아픈뎅.. 그럼 분기를 타서 몇버전에선 위치 바꿔주고 어떤버전에서 그냥 하는 걸 만들어줘야해,
-                //그건 이런 상황이 나오면 어떻게 하는지 알려드릴게요~
-
-                builder.create().show();
+                showDefaultDialog(info);
 
 //                // 위에 경고창만들었으니까 위로 보내자! 밑에 삭제 및 업데이트를...
 //                // 삭제
@@ -263,10 +218,115 @@ public class AdapterViewExamActivity extends AppCompatActivity implements Dialog
                 return true;
             case R.id.action_item2:
                 Toast.makeText(this, "action 2", Toast.LENGTH_SHORT).show();
+
+                //다이얼로그 만든걸 가져온다면.. 아 위에 꺼랑 겹치네.. showDefaltDialog 라는 이름으로 메소트 만들어서 뺌
+                showCustomDialog();
+
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    private void showCustomDialog() {
+        // 우선 앞어처럼 대화상자를 만들어주고
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //아까 만든걸 가져와서 붙인다.
+        //레이아웃을 가져올려고 하면 어떻게해야하지??
+        //파인드뷰아이디 못써!
+        // 레이아웃 인플레이터를 쓰면 된다.
+        // 붙일 부모를 찾는데.. 그건 null해주면 된데.
+//       View view = LayoutInflater.from(this).inflate(R.layout.dialog_signin, null, false);
+
+        //액티비티가 인플레이터레이아웃을 내장하고 있데.
+        //그래서 저 위에 껄로 안하고
+        View view = getLayoutInflater().inflate(R.layout.dialog_signin, null);
+
+//붙이는것도 위로 올려줌
+        builder.setView(view);
+        final AlertDialog dialog = builder.create(); // 밑에서 하던걸 위로 올리고
+
+        //버튼도 붙여줭
+
+//        builder.setPositiveButton("예",null);
+//        builder.setNegativeButton("아니오",null);
+//        //그런데 사장님은 이거 싫데.. 예는 왼 아니오는 오른쪽에 고정되었으면 좋겠데.
+//        // 그럼 위에꺼 못씀.
+        //아까 레이아웃에 가서 편집을 하고! 그리고 버튼을 가지고온다
+        view.findViewById(R.id.positive_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(AdapterViewExamActivity.this, "잘눌림", Toast.LENGTH_SHORT).show();
+
+                //다이얼로그 닫기
+                dialog.dismiss();
+
+            }
+        });
+
+        view.findViewById(R.id.negative_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //다이얼로그 닫기
+                dialog.dismiss();
+            }
+        });
+
+//        // 그럼 이제 붙여!
+//        builder.setView(view);
+//        //보여줭
+//        builder.create().show();
+
+        builder.show();
+
+    }
+
+    private void showDefaultDialog(final AdapterView.AdapterContextMenuInfo info) {
+        // 물어보자 AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(AdapterViewExamActivity.this);
+        builder.setTitle("삭제");
+        builder.setMessage("정말로 삭제하시겠습니까?");
+//                builder.setAdapter(); 셋어뎁터가 된다는 것은 리스트뷰를 사용할 수 있다는 거겠지?
+        // 바깥 부분 클릭 했을 때 닫기
+        builder.setCancelable(false); //해버리면 밖에 클릭해도 대화상자 사라지지 않음!
+        builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.d(TAG, "onClick: " + which); // 위치가 뭔 역할이지?  모르겠으면 찍어보자!!
+                // which는 다이얼로그 인터페이스에 정의가 되어있어.
+                // 그래서 이 상수를 이용해서 뭔가를 할 수 있겠지..
+                // 위에 클래스에 DialogInterface.OnClickListener 인플리먼트 하고 알트엔터하면
+                // public void onClick(DialogInterface dialog, int which)  이거 만들어서
+                // 여기서 스위치 문으로 돌릴 수 도 있지..
+                // 맨밑에 해본거 있음. 참고 해봐..
+
+                // 삭제
+                mPeopleData.remove(info.position);
+                // 업데이트
+                // 어뎁터에게 알려준다 야! 데이터 바뀌었어!!!
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
+//                builder.setNegativeButton("아니오", null);
+//                Log.d(TAG, "onContextItemSelected: " + new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Log.d(TAG, "onClick: " + which);
+//                    }
+//                });
+
+        builder.setNegativeButton("아니오", this);
+
+//                AlertDialog dialog = builder.create();
+//                dialog.show(); // 하면 화면에 보인다.
+        //\\\\\\\\\\\\\\\\\\\\\\\\\\\\==>
+        builder.setIcon(R.drawable.beach2); // 화면에 이렇게 하면 아이콘사이즈로 들어감!
+        //그런데 아니오 예 방향을 바꾸고 싶어.. 이건 버전마다 위치가 다른거거든.. 그래서 바꿀려고 하면
+        //머리 아픈뎅.. 그럼 분기를 타서 몇버전에선 위치 바꿔주고 어떤버전에서 그냥 하는 걸 만들어줘야해,
+        //그건 이런 상황이 나오면 어떻게 하는지 알려드릴게요~
+
+        builder.create().show();
     }
 
     /////////뒤로 가기 키로 저장을 해보자///////////////
@@ -291,13 +351,12 @@ public class AdapterViewExamActivity extends AppCompatActivity implements Dialog
     }
 
 
-
     @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
                 break;
-            case  DialogInterface.BUTTON_NEGATIVE:
+            case DialogInterface.BUTTON_NEGATIVE:
         }
     }
 }
