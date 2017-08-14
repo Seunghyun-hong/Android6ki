@@ -14,7 +14,7 @@ public class CountCounterActivity extends AppCompatActivity {
     private int bPoint = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { // 만약 번들에 저장된게 없으면 널! 근데 밑에 저장하는 코드가 있으니까 불러올 수 있어!
         super.onCreate(savedInstanceState);
 
         // 레이아웃 설정
@@ -26,6 +26,14 @@ public class CountCounterActivity extends AppCompatActivity {
         mAPoint.setText(" " + aPoint);
         mBPoint.setText(" " + bPoint);
 
+        if (savedInstanceState != null) {
+            // 복원
+            aPoint = savedInstanceState.getInt("a");
+            bPoint = savedInstanceState.getInt("b");
+
+            mAPoint.setText("" + aPoint);
+            mBPoint.setText("" + bPoint);
+        }
 
     }
 
@@ -77,15 +85,15 @@ public class CountCounterActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        //복원
-        aPoint = savedInstanceState.getInt("a");
-        bPoint = savedInstanceState.getInt("b");
-
-        mAPoint.setText("" + aPoint);
-        mBPoint.setText("" + bPoint);
-    }
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//
+//        //복원
+//        aPoint = savedInstanceState.getInt("a");
+//        bPoint = savedInstanceState.getInt("b");
+//
+//        mAPoint.setText("" + aPoint);
+//        mBPoint.setText("" + bPoint);
+//    }
 }
