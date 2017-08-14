@@ -64,7 +64,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyWebBrowserActivity"
+        <activity
+            android:name=".MyWebBrowserActivity"
             android:label="나만의 웹브라우저">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -102,7 +103,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".adapterView.DetailAddressActivity"></activity>
+        <activity android:name=".adapterView.DetailAddressActivity" />
+        <activity android:name=".LifeCycleActivity"
+            android:label="액티비티 수명주기">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
