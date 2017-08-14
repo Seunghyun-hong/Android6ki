@@ -40,22 +40,22 @@ public class CountCounterActivity extends AppCompatActivity {
     }
 
     public void aPlus1ButtonClicked(View view) {
-        aPoint ++;
+        aPoint++;
         mAPoint.setText(" " + aPoint);
     }
 
     public void bPlus3ButtonClicked(View view) {
-        bPoint = bPoint +3;
+        bPoint = bPoint + 3;
         mBPoint.setText(" " + bPoint);
     }
 
     public void bPlus2ButtonClicked(View view) {
-        bPoint = bPoint +2;
+        bPoint = bPoint + 2;
         mBPoint.setText(" " + bPoint);
     }
 
     public void bPlus1ButtonClicked(View view) {
-        bPoint ++;
+        bPoint++;
         mBPoint.setText(" " + bPoint);
     }
 
@@ -64,5 +64,28 @@ public class CountCounterActivity extends AppCompatActivity {
         bPoint = 0;
         mAPoint.setText(" " + aPoint);
         mBPoint.setText(" " + bPoint);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //저장
+        //아까는 쉐어드프리퍼런스에서 했지만.. 이번엔 번틀 outState 에 저장을 할꺼다.
+        //인텐트에 담겨있는 .. 야인 인텐트 안에도 있덴...
+        outState.putInt("a", aPoint);
+        outState.putInt("b", bPoint);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        //복원
+        aPoint = savedInstanceState.getInt("a");
+        bPoint = savedInstanceState.getInt("b");
+
+        mAPoint.setText("" + aPoint);
+        mBPoint.setText("" + bPoint);
     }
 }
