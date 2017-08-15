@@ -113,8 +113,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".fragment.basketball.BasketBallActivity"
+        <activity
+            android:name=".fragment.basketball.BasketBallActivity"
             android:label="프래그먼트버전 농구">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".fragment.color.ColorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
