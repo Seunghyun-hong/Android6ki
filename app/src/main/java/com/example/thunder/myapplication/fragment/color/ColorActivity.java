@@ -47,4 +47,13 @@ public class ColorActivity extends AppCompatActivity {
                 .replace(R.id.container, fragment)
                 .commit();
     }
+
+    public void onCreateRandomFragmentButtonClicked(View view) {
+        ColorFragment fragment = ColorFragment.newInstance();
+
+        // R.id.container 영역에 프래그먼트를 교체하겠다
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
 }

@@ -25,6 +25,12 @@
         android:onClick="onCreateGreenFragmentButtonClicked"
         android:text="프래그먼트 생성" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCreateRandomFragmentButtonClicked"
+        android:text="랜덤 프래그먼트 생성" />
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"

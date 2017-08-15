@@ -34,6 +34,21 @@ public class ColorFragment extends Fragment {
         return fragment;
     }
 
+    public static ColorFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        int r = new Random().nextInt(256);
+        int g = new Random().nextInt(256);
+        int b = new Random().nextInt(256);
+        int color = Color.argb(255, r, g, b);
+        args.putInt("color", color);
+
+        ColorFragment fragment = new ColorFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,10 +60,8 @@ public class ColorFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        int r = new Random().nextInt(256);
-        int g = new Random().nextInt(256);
-        int b = new Random().nextInt(256);
-        int color = Color.argb(255, r, g, b);
-        getView().setBackgroundColor(color);
+        int color = getArguments().getInt("color");
+
+        view.setBackgroundColor(color);
     }
 }
