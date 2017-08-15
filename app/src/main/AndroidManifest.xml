@@ -104,8 +104,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".adapterView.DetailAddressActivity" />
-        <activity android:name=".LifeCycleActivity"
+        <activity
+            android:name=".LifeCycleActivity"
             android:label="액티비티 수명주기">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".fragment.basketball.BasketBallActivity"
+            android:label="프래그먼트버전 농구">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
