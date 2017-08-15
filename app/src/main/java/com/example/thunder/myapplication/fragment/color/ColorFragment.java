@@ -24,6 +24,15 @@ public class ColorFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static ColorFragment newInstance(int color) {
+
+        Bundle args = new Bundle();
+        args.putInt("color", color);
+
+        ColorFragment fragment = new ColorFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,10 +49,6 @@ public class ColorFragment extends Fragment {
         int g = new Random().nextInt(256);
         int b = new Random().nextInt(256);
         int color = Color.argb(255, r, g, b);
-        getView().setBackgroundColor(color);
-    }
-
-    public void setBackgroundColor(int color) {
         getView().setBackgroundColor(color);
     }
 }

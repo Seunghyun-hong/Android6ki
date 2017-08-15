@@ -10,7 +10,19 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onCreateFragmentButtonClicked"
+        android:onClick="onCreateRedFragmentButtonClicked"
+        android:text="프래그먼트 생성" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCreateBlueFragmentButtonClicked"
+        android:text="프래그먼트 생성" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCreateGreenFragmentButtonClicked"
         android:text="프래그먼트 생성" />
 
     <FrameLayout
