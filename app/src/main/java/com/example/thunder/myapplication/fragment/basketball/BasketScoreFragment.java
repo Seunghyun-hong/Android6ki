@@ -1,5 +1,7 @@
 package com.example.thunder.myapplication.fragment.basketball;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,9 +18,25 @@ import com.example.thunder.myapplication.R;
 
 public class BasketScoreFragment extends Fragment implements View.OnClickListener {
 
+    public interface OnWarningListener {
+        void onWarning(String teamName);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+                        //이 컨텍스트(레퍼런스)는 이 프래그먼트와 실제로 붙는 액티비티의 컨텍스트
+        //어찌보면 이 컨텍스트가 액티비티라고 할 수 있지.
+        super.onAttach(context);
+
+        // 액티비티와 연결 됨!
+        mListener = (OnWarningListener) context;
+    }
+
     private TextView mScoreTextView;
     private TextView mTeamNameTextView;
     private int mScore;
+
+    private OnWarningListener mListener;
 
     //뷰를 만드는 곳
     @Nullable
@@ -64,6 +82,9 @@ public class BasketScoreFragment extends Fragment implements View.OnClickListene
                 mScore++;
                 break;
         }
+        if(mScore > 20) {
+            mListener.onWarning(mTeamNameTextView.getText().toString());
+        }
         mScoreTextView.setText("" + mScore);
     }
 
@@ -77,4 +98,10 @@ public class BasketScoreFragment extends Fragment implements View.OnClickListene
     public void setTeamName(String name) {
         mTeamNameTextView.setText(name);
     }
+
+    // 빨갛게 되는 거 추가
+    public void warning() {
+        getView().setBackgroundColor(Color.RED);
+    }
+
 }
