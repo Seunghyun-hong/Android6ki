@@ -22,65 +22,31 @@
         <activity
             android:name=".CoffeeActivity"
             android:label="커피 주문">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CountCounterActivity"
-            android:label="농구 게임">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="농구점수">
         </activity>
-        <activity android:name=".ActivityMoveActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".ActivityMoveActivity"
+            android:label="버튼">
         </activity>
         <activity android:name=".TargetActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="화면 전환">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".AdministerActivity" />
         <activity
             android:name=".ImplicitIntentActivity"
             android:label="인텐트 해보자">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MyWebBrowserActivity"
             android:label="나만의 웹브라우저">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SignUpExamActivity"
             android:label="SignUpExam">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SignUpMessageActivity"
@@ -88,57 +54,31 @@
         <activity
             android:name=".adapterView.AdapterViewExamActivity"
             android:label="연락처">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".adapterviewexam.ColorfulAdapterActivity"
             android:label="알록달록 리스트뷰">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".adapterView.DetailAddressActivity" />
         <activity
             android:name=".LifeCycleActivity"
             android:label="액티비티 수명주기">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".fragment.basketball.BasketBallActivity"
             android:label="프래그먼트버전 농구">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".fragment.color.ColorActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".fragment.exam.ColorSelectExamActivity"
-            android:label="동적인 프래그먼트 (컬러)">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="동적인 프래그먼트 과제">
         </activity>
-        <activity android:name=".fragment.exam.suwonexam.ColorExamActivity">
+        <activity
+            android:name=".fragment.exam.suwonexam.ColorExamActivity"
+            android:label="원장님이 만든 프래그먼트 붙이고 제거하고">
+        </activity>
+        <activity android:name=".ListViewActivityActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
