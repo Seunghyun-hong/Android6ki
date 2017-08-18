@@ -129,8 +129,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".fragment.exam.ColorSelectExamActivity"
+        <activity
+            android:name=".fragment.exam.ColorSelectExamActivity"
             android:label="동적인 프래그먼트 (컬러)">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".fragment.exam.suwonexam.ColorExamActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
