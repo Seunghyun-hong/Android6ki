@@ -68,18 +68,21 @@ public class SendDataFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mSendDataListener.onSandData(mDataEditText.getText().toString());
+                mDataEditText.setText("");//에디트뷰 초기화
             }
         });
         //★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
     }
 
-    // 이건 결국 안씀 ㅋㅋㅋㅋ
-//    void sendData(String data) {
-//        getView().setBackgroundColor(Color.GREEN);
-//    }
 
     // 텍스트 뷰어를 가져오는 메소드를 만들자
-    void getTextview(String data) {
-        mColorTextView.setText(data);
+    void getTextView(String data) {
+        mColorTextView.setText(data + "\n" + mColorTextView.getText().toString());
+        // 이거 바꾸니까 액티비티에서 프래그먼트로 가는건 쌓이는데....
+    }
+
+    //    //쌓이는 메소드 만들자?
+    String loadData(String data) {
+        return mData;
     }
 }

@@ -33,12 +33,17 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/get_color_text"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#6672f8"
-            android:text="" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/get_color_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#6672f8"
+                android:text="" />
+        </ScrollView>
 
     </LinearLayout>
 
