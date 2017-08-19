@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.thunder.myapplication.fragment.exam.SendDataFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/send_Activity_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="액티비티로 전달할 내용" />
+
+        <Button
+            android:id="@+id/send_data_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전달" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/color_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#6672f8"
+        android:text="" />
+
+</LinearLayout>
